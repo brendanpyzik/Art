@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def login(request):
-    template = "index.html"
+    template = "Registration/login.html"
     return render(request, template)
 
 
@@ -11,6 +11,9 @@ def index(request):
     template = "index.html"
     return render(request, template)
 
+def addinfo(request):
+    template = "Forms/addinfo.html"
+    return render(request, template)
 
 def search(request):
     template = "search.html"
@@ -18,7 +21,7 @@ def search(request):
 
 
 def register(request):
-    template = "register.html"
+    template = "Registration/register.html"
     return render(request, template)
 
 
