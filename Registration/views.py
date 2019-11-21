@@ -15,8 +15,8 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     if not request.user.is_authenticated:
         return render(request, 'registration/login.html', {'message' : None})
-    context  = {'user' : request.user}
-    return render(request, 'registration/user.html', context)
+    context = {'user' : request.user}
+    return render(request, 'index.html', context)
 
 def login_view(request):
     username = request.POST['username']
@@ -39,5 +39,5 @@ def show_profile(request):
     return render(request, 'registration/profile.html')
 
 '''@login_required(login_url='/login/')
-def show_profile(request):
-    return render(request, 'simple_authentication/profile.html')'''
+    def show_profile(request):
+    return render(request, 'registration/profile.html')'''
