@@ -1,24 +1,35 @@
-{% extends 'base.html' %}
+<!doctype html>
 
-{% block content %}
+<html>
 
-    <h1> Login </h1>
+    <head>
+        <title>HTML Forms</title>
 
-    {% if message %}
+        <script>
 
-        <div>
-            {{ message }}
-        </div>
 
-    {% endif %}
+        </script>
+    </head>
 
-    <form  action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        Username: <input name="username" type="text">
-        <br>
-        Password: <input name="password" type="password">
-        <br>
-        <input type="submit" value="Login">
-    </form>
+    <body>
+        <h1> Login </h1>
 
-{% endblock content %}
+        {% if message %}
+
+            <div>
+                {{ message }}
+            </div>
+
+        {% endif %}
+
+        <form  action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            Username: <input name="username" type="text">
+            <br>
+            Password: <input name="password" type="password">
+            <br>
+            <input type="submit" value="Login">
+        </form>
+
+    </body>
+</html>
