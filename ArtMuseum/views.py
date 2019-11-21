@@ -14,11 +14,11 @@ def login(request):
     if not request.user.is_authenticated:
         return render(request, 'Registration/login.html', {'message' : None})
     context  = {'user' : request.user}
-    return render(request, 'index.html', context)
+    return render(request, 'profile.html', context)
 
 
 def index(request):
-    template = "index.html"
+    template = "profile.html"
     return render(request, template)
 
 def addinfo(request):
