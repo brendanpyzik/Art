@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth.models import User
 from django.shortcuts import render
 
 # Create your views here.
@@ -41,3 +43,44 @@ def show_profile(request):
 '''@login_required(login_url='/login/')
     def show_profile(request):
     return render(request, 'registration/profile.html')'''
+
+def create_userold(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    return render(request, 'registration/login.html', {'message': None})
+
+def create_user(request):
+    #This is the method to render the registiration form page and create a new user based on the form data
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        username = request.POST['username']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        # More validation to make sure the above fields are not empty!
+
+        # Validate password1 matched with password2
+        # Validate the username and email address was not taken
+        if password1 == password2:
+            if User.objects.filter(username = username).exists():
+                print("Username is taken, must be unique")
+                messages.info(request, 'Username is taken, must be unique')
+                return redirect('register')
+            elif User.objects.filter(email = email).exists():
+                print("Email is taken, must be unique")
+                messages.info(request, 'Email is taken, must be unique')
+                return redirect('register')
+            else:
+                User.objects.create_user(first_name=first_name, last_name=last_name, email=email,username=username, password=password1)
+                print("A user has been created!")
+        else:
+            print("Passwords do not match!")
+            messages.info(request, 'Passwords do not match!')
+            return redirect('register')
+
+        return redirect('index')
+
+    else:
+        return render(request, 'registration/register.html')
