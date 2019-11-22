@@ -67,18 +67,19 @@ def create_user(request):
             if User.objects.filter(username = username).exists():
                 print("Username is taken, must be unique")
                 messages.info(request, 'Username is taken, must be unique')
-                return redirect('register')
+                return render(request, 'registration/register.html', {'message' : 'Username is taken, must be unique'})
             elif User.objects.filter(email = email).exists():
                 print("Email is taken, must be unique")
                 messages.info(request, 'Email is taken, must be unique')
-                return redirect('register')
+                return render(request, 'registration/register.html', {'message' : 'Email is taken, must be unique'})
             else:
                 User.objects.create_user(first_name=first_name, last_name=last_name, email=email,username=username, password=password1)
                 print("A user has been created!")
+                return render(request, 'registration/login.html', {'message': 'A user has been created!'})
         else:
             print("Passwords do not match!")
             messages.info(request, 'Passwords do not match!')
-            return redirect('register')
+            return render(request, 'registration/register.html', {'message': 'Passwords do not match!'})
 
         return redirect('index')
 
