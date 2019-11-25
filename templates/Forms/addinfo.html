@@ -11,10 +11,12 @@
                 }
         }
         if (type==='Artist'){
-                document.getElementById('Form').innerHTML = "Artist";
+                document.getElementById('ArtistForm').style = "display: block";
+                document.getElementById('PieceForm').style = "display: none";
         }
         else{
-                document.getElementById('Form').innerHTML = "Piece";
+                document.getElementById('ArtistForm').style = "display: none";
+                document.getElementById('PieceForm').style = "display: block";
 
         }
     }
@@ -31,6 +33,40 @@
     <button onclick= "changeEntryType();" type="button">Submit</button>
 
     <hr>
-    <div id="Form"></div>
+    <div id="ArtistForm" style="display: none">
+        <form  action="{% url 'addartist' %}" method="post">
+            {% csrf_token %}
+            Name: <input name="artist_name" type="text">
+            <br>
+            Movement: <input name="movement" type="text">
+            <br>
+            Country: <input name="country" type="text">
+            <br>
+            Birth year: <input name="birth_year" type="number">
+            <br>
+            Death year: <input name="death_year" type="number">
+            <br>
+            <input type="submit" value="Create">
+            </form>
+    </div>
+
+    <div id="PieceForm" style="display: none">
+        <form  action="{% url 'addpiece' %}" method="post">
+            {% csrf_token %}
+            Artist: <input name="artist" type="text">
+            <br>
+            Title: <input name="title" type="text">
+            <br>
+            Type: <input name="type" type="text">
+            <br>
+            Medium: <input name="medium" type="text">
+            <br>
+            Picture URL: <input name="picture_url" type="text">
+            <br>
+            Year: <input name="picture_url" type="number">
+            <br>
+            <input type="submit" value="Create">
+            </form>
+    </div>
     
 {% endblock content %}
