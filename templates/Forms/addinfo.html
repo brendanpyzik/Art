@@ -25,6 +25,14 @@
 
 {% block content %}
 
+    {% if message %}
+
+            <div>
+                {{ message }}
+            </div>
+
+    {% endif %}
+
     <p>Type of entry:</p>
     <input type="radio" name="entryType" value="Artist"> Artist
     <br>
