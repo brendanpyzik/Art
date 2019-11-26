@@ -10,5 +10,6 @@ urlpatterns = [
     path('artist/', views.artist, name='artist'),
     path('piece/', views.piece, name='piece'),
     path('addinfo/', views.addinfo, name='addinfo'),
-    path('Registration/', include('Registration.urls'), name='Registration'),
+    path('', include('Registration.urls'), name='Registration'),
+    path('', include('Forms.urls'), name='Forms'),
 ]

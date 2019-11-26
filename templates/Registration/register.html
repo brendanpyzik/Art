@@ -1,8 +1,43 @@
-{% extends 'base.html' %}
+<!doctype html>
 
-{% block content %}
+<html>
 
-    Register
+    <head>
+        <title>Create new user</title>
 
-{% endblock content %}
+        <script>
 
+
+        </script>
+    </head>
+
+    <body>
+        <h1> Create a user </h1>
+
+        {% if message %}
+
+            <div>
+                {{ message }}
+            </div>
+
+        {% endif %}
+
+        <form  action="{% url 'createuser' %}" method="post">
+            {% csrf_token %}
+            First Name: <input name="first_name" type="text">
+            <br>
+            Last Name: <input name="last_name" type="text">
+            <br>
+            Email: <input name="email" type="text">
+            <br>
+            Username: <input name="username" type="text">
+            <br>
+            Password: <input name="password1" type="password">
+            <br>
+            Password (Repeat): <input name="password2" type="password">
+            <br>
+            <input type="submit" value="Create">
+        </form>
+        <a href="{% url 'index' %}">Cancel</a>
+    </body>
+</html>
