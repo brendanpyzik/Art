@@ -3,7 +3,6 @@ from django.shortcuts import render
 # Create your views here.
 from ArtMuseum.models import Artist, Piece
 
-
 def add_artist(request):
     if not request.user.is_authenticated:
         return render(request, 'registration/login.html', {'message': None})
@@ -15,14 +14,14 @@ def add_artist(request):
         death_year = request.POST['death_year']
 
         #if all([artist_name, movement, country, birth_year, death_year]):
-        #    return render(request, 'Forms/addinfo.html', {'message': "One of the inputs was empty!"})
+        #    return render(request, 'Forms/addinfo.html', {'message': "One of the inputs was empty!", 'artists': Artist.objects.all()})
 
         if Artist.objects.filter(artist_name=artist_name).exists():
-            return render(request, 'Forms/addinfo.html', {'message': 'This artist already exists'})
+            return render(request, 'Forms/addinfo.html', {'message': 'This artist already exists', 'artists': Artist.objects.all()})
 
-        a = Artist.objects.create(artist_name=artist_name, movement=movement, country=country,birth_year=birth_year, death_year=death_year)
-        return render(request, 'Forms/addinfo.html', {'message': 'Artist Added!'})
-    return render(request, 'Forms/addinfo.html', {'message': None})
+        a = Artist.objects.create(artist_name=artist_name, movement=movement, country=country,birth_year=birth_year, death_year =death_year)
+        return render(request, 'Forms/addinfo.html', {'message': 'Artist Added!', 'artists': Artist.objects.all()})
+    return render(request, 'Forms/addinfo.html', {'message': None, 'artists': Artist.objects.all()})
 
 def add_piece(request):
     if not request.user.is_authenticated:
@@ -36,12 +35,12 @@ def add_piece(request):
         year = request.POST['year']
 
         #if None in (artist, title, type, medium, picture_url, year):
-        #    return render(request, 'Forms/addinfo.html', {'message': "One of the inputs was empty!"})
+        #    return render(request, 'Forms/addinfo.html', {'message': "One of the inputs was empty!", 'artists': Artist.objects.all()})
 
         if not Artist.objects.filter(artist_name=artist).exists():
-            return render(request, 'Forms/addinfo.html', {'message': "This artist doesn't exist yet so create them first"})
+            return render(request, 'Forms/addinfo.html', {'message': "This artist doesn't exist yet so create them first", 'artists': Artist.objects.all()})
 
-        p = Piece.objects.create(artist=artist, title=title, type=type,medium=medium, picture_url=picture_url,year=year)
-        return render(request, 'Forms/addinfo.html', {'message': 'Piece Added!'})
-    return render(request, 'Forms/addinfo.html', {'message': None})
+        p = Piece.objects.create(artist=Artist.objects.get(artist_name=artist), title=title, type=type,medium=medium, picture_url=picture_url, year=year)
+        return render(request, 'Forms/addinfo.html', {'message': 'Piece Added!', 'artists': Artist.objects.all()})
+    return render(request, 'Forms/addinfo.html', {'message': None, 'artists': Artist.objects.all()})
 

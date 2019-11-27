@@ -61,7 +61,11 @@
     <div id="PieceForm" style="display: none">
         <form  action="{% url 'addpiece' %}" method="post">
             {% csrf_token %}
-            Artist: <input name="artist" type="text">
+            Artist: <select name="artist">
+            {% for selectedartist in artists %}
+                <option value="{{selectedartist.artist_name}}">{{selectedartist.artist_name}}</option>
+            {% endfor %}
+            </select>
             <br>
             Title: <input name="title" type="text">
             <br>
