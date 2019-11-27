@@ -62,6 +62,7 @@
         <form  action="{% url 'addpiece' %}" method="post">
             {% csrf_token %}
             Artist: <select name="artist">
+            <option value="" selected>---------</option>
             {% for selectedartist in artists %}
                 <option value="{{selectedartist.artist_name}}">{{selectedartist.artist_name}}</option>
             {% endfor %}
