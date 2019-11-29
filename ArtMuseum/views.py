@@ -56,3 +56,7 @@ def piece(request):
         return render(request, 'registration/login.html', {'message': None})
     template = "piece.html"
     return render(request, template)
+
+def query(request):
+    pieces = Piece.objects.all()
+    return render(request, 'search.html', {'pieces' : pieces})

@@ -5,7 +5,7 @@ from Registration import views as viewsR
 urlpatterns = [
     path('', viewsR.index, name='start'),
     path('index/', views.index, name='index'),
-    path('search/', views.search, name='search'),
+    path('search/', views.query, name='search'),
     path('register/', views.register, name='register'),
     path('artist/', views.artist, name='artist'),
     path('piece/', views.piece, name='piece'),

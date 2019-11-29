@@ -10,8 +10,8 @@
         Artist:
         <select name="artist">
             <option value="" selected>---------</option>
-            {% for selectedartist in artists %}
-                <option value="{{selectedartist.artist_name}}">{{selectedartist.artist_name}}</option>
+            {% for artist in artists %}
+                <option value="{{artist.artist_name}}">{{artist.artist_name}}</option>
             {% endfor %}
         </select>
         <br>Title:
@@ -30,5 +30,16 @@
         <input name="yearto" type="number" value="0">
         <br><input type="submit" value="Search">
     </form>
+
+    <h3>Pieces</h3>
+
+    <ul>
+        {% for piece in pieces %}
+                <li>{{ piece }}</li>
+            </a>
+        {% endfor %}
+
+    </ul>
+
     
 {% endblock content %}

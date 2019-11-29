@@ -44,14 +44,5 @@ def add_piece(request):
         return render(request, 'Forms/addinfo.html', {'message': 'Piece Added!', 'artists': Artist.objects.all()})
     return render(request, 'Forms/addinfo.html', {'message': None, 'artists': Artist.objects.all()})
 
-def search(request):
-    if not request.user.is_authenticated:
-        return render(request, 'registration/login.html', {'message': None})
-    if request.method == 'POST':
-        artist = request.POST['artist']
-        title = request.POST['artist_name']
-        movement = request.POST['movement']
-        country = request.POST['country']
-        type = request.POST['type']
-        medium = request.POST['medium']
-        year = request.POST['year']
+
+
