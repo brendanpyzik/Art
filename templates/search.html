@@ -4,6 +4,27 @@
 
 {% block content %}
     
-    Search
+    <h3>Search</h3>
+    <form  action="{% url 'search' %}" method="post">
+        {% csrf_token %}
+        Artist:
+        <select name="artist">
+            <option value="" selected>---------</option>
+            {% for selectedartist in artists %}
+                <option value="{{selectedartist.artist_name}}">{{selectedartist.artist_name}}</option>
+            {% endfor %}
+        </select>
+        <br>Title:
+        <input name="title" type="text">
+        <br>Type:
+        <input name="type" type="text">
+        Medium:
+        <input name="medium" type="text">
+        <br>Year: from:
+        <input name="yearfrom" type="number" value="0">
+        to:
+        <input name="yearto" type="number" value="0">
+        <br><input type="submit" value="Search">
+    </form>
     
 {% endblock content %}

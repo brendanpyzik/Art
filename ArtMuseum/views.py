@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from .models import Artist,Piece
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
@@ -27,7 +27,10 @@ def addinfo(request):
     if not request.user.is_authenticated:
         return render(request, 'registration/login.html', {'message': None})
     template = "Forms/addinfo.html"
-    return render(request, template)
+    context = {
+        'artists': Artist.objects.all(),
+    }
+    return render(request, template, context)
 
 def search(request):
     if not request.user.is_authenticated:
