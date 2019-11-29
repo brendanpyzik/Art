@@ -6,29 +6,78 @@
     
     <h3>Search</h3>
     <form  action="{% url 'search' %}" method="post">
-        {% csrf_token %}
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-2">
         Artist:
-        <select name="artist">
-            <option value="" selected>---------</option>
-            {% for artist in artists %}
-                <option value="{{artist.artist_name}}">{{artist.artist_name}}</option>
-            {% endfor %}
-        </select>
-        <br>Title:
-        <input name="title" type="text">
-        <br>Movement:
-        <input name="type" type="text">
-        Country:
-        <input name="medium" type="text">
-        <br>Type:
-        <input name="type" type="text">
-        Medium:
-        <input name="medium" type="text">
-        <br>Year: from:
-        <input name="yearfrom" type="number" value="0">
-        to:
-        <input name="yearto" type="number" value="0">
-        <br><input type="submit" value="Search">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-10">
+            <select name="artist">
+                    <option value="" selected>---------</option>
+                    {% for artist in artists %}
+                        <option value="{{artist.artist_name}}">{{artist.artist_name}}</option>
+                    {% endfor %}
+            </select><br>
+        </div>
+        <div class="col-2">
+        Title:
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-10">
+            <input name="title" type="text" size="15">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            Movement: <br>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-10">
+            <input name="movement" type="text" size="15">
+        </div>
+        <div class="col-2">
+            Country:
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-10">
+            <input name="country" type="text" size="15">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            Type: <br>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-10">
+            <input name="type" type="text" size="15">
+        </div>
+        <div class="col-2">
+            Medium:
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-10">
+            <input name="medium" type="text" size="15">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            Year:
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            From:
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-10">
+             <input name="yearfrom" type="number" value="0" size="15">
+        </div>
+        <div class="col-2">
+            To:
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-10">
+             <input name="yearto" type="number" value="0" size="15">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <input type="submit" value="Search">
+        </div>
+    </div>
     </form>
 
     <h3>Pieces</h3>
