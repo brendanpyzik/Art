@@ -1,4 +1,7 @@
 from __future__ import unicode_literals
+
+from django.views import generic
+
 from .models import Artist,Piece
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -58,5 +61,16 @@ def piece(request):
     return render(request, template)
 
 def query(request):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {'message': None})
     pieces = Piece.objects.all()
-    return render(request, 'search.html', {'pieces' : pieces})
+    artists = Artist.objects.all()
+    return render(request, 'search.html', {'pieces' : pieces,'artists' : artists})
+
+class artistView(generic.DetailView):
+    model = Artist
+    template_name = 'artist.html'
+
+class pieceView(generic.DetailView):
+    model = Piece
+    template_name = 'piece.html'

@@ -2,6 +2,8 @@
 
 {% block content %}
 
-Artist Display
+    <p>Name: {{ artist.artist_name }}</p>
+    <p>Movement: {{ artist.movement }}</p>
 
+    <a href="{% url 'search' %}">Back</a>
 {% endblock content %}

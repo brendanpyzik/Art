@@ -4,6 +4,9 @@
 
 {% block content %}
     
-    Piece Display
-    
+    <p>Artist: {{ piece.artist }}</p>
+    <p>Title: {{ piece.title }}</p>
+    <img src="{{ piece.picture_url }}">
+
+    <a href="{% url 'search' %}">Back</a>
 {% endblock content %}

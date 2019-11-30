@@ -80,15 +80,20 @@
     </div>
     </form>
 
+    <h3>Artists</h3>
+
+    <ul>
+        {% for artist in artists %}
+                <li><a href="{% url 'artist' artist.id %}">{{ artist }}</a></li>
+        {% endfor %}
+    </ul>
+
     <h3>Pieces</h3>
 
     <ul>
         {% for piece in pieces %}
-                <li>{{ piece }}</li>
-            </a>
+                <li><a href="{% url 'piece' piece.id %}">{{ piece }}</a></li>
         {% endfor %}
-
     </ul>
-
     
 {% endblock content %}
