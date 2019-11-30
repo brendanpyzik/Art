@@ -92,6 +92,7 @@
 
     <ul>
         {% for piece in pieces %}
+
                 <li><a href="{% url 'piece' piece.id %}">{{ piece }}</a></li>
         {% endfor %}
     </ul>

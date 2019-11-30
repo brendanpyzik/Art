@@ -3,10 +3,9 @@
 {% block title %}{%  endblock %}
 
 {% block content %}
-    
+    <a href="{% url 'search' %}" style="float: right">Back</a>
     <p>Artist: {{ piece.artist }}</p>
     <p>Title: {{ piece.title }}</p>
-    <img src="{{ piece.picture_url }}">
+    <img src="{{ piece.picture_url }}" height=300 width=300>
 
-    <a href="{% url 'search' %}">Back</a>
 {% endblock content %}
