@@ -3,7 +3,15 @@
 {% block title %}Search{%  endblock %}
 
 {% block content %}
-    
+
+    {% if message %}
+
+            <div>
+                <h5>{{ message }}</h5>
+            </div>
+
+    {% endif %}
+
     <h3>Search</h3>
     <form  action="{% url 'search' %}" method="post">
     {% csrf_token %}
@@ -92,7 +100,6 @@
 
     <ul>
         {% for piece in pieces %}
-
                 <li><a href="{% url 'piece' piece.id %}">{{ piece }}</a></li>
         {% endfor %}
     </ul>

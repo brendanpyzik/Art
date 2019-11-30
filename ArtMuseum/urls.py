@@ -12,4 +12,5 @@ urlpatterns = [
     path('addinfo/', views.addinfo, name='addinfo'),
     path('', include('Registration.urls'), name='Registration'),
     path('', include('Forms.urls'), name='Forms'),
+    path('delete/',views.delete, name='delete')
 ]
