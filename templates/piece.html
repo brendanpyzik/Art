@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}{%  endblock %}
+{% block title %}{{ piece.artist }}, {{ piece }}{%  endblock %}
 
 {% block content %}
-    <a href="{% url 'search' %}" style="float: right">Back</a>
+    <a href="javascript:history.back()" style="float: right">Back</a>
     <p>Artist: {{ piece.artist }}</p>
     <p>Title: {{ piece.title }}</p>
     <img src="{{ piece.picture_url }}" height=300 width=300>
