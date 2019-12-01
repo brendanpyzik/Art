@@ -7,6 +7,7 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('search/', views.search, name='search'),
     path('searchartist/', views.searchartist, name='searchartist'),
+    path('searchpiece/', views.searchpiece, name='searchpiece'),
     path('register/', views.register, name='register'),
     path('<int:pk>/artist/', views.artistView.as_view(), name='artist'),
     path('<int:pk>/piece/', views.pieceView.as_view(), name='piece'),

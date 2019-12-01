@@ -24,14 +24,6 @@ function changeEntryType(){
 
 {% block content %}
 
-    {% if message %}
-
-            <div>
-                <h5>{{ message }}</h5>
-            </div>
-
-    {% endif %}
-
     <h3>Search</h3>
     <p>Search for pieces by:
     <input type="radio" name="entryType" value="Artist"> Artist
@@ -51,7 +43,7 @@ function changeEntryType(){
         </form>
     </div>
     <div id="PieceForm" style="display: none">
-        <form action="" method="post">
+        <form action="{% url 'searchpiece' %}" method="post">
             {% csrf_token %}
             Title:
             <input type="text" name="title">
@@ -60,11 +52,17 @@ function changeEntryType(){
 
     </div>
 
-    <h3>Results</h3>
+    {% if message %}
+
+            <div>
+                <h3>{{ message }}</h3>
+            </div>
+
+    {% endif %}
 
     <ul>
         {% for piece in result %}
-                <li><a href="{% url 'piece' piece.id %}">{{ piece }}</a></li>
+                <li><a href="{% url 'piece' piece.id %}">{{ piece }}</a> by <a href="{% url 'artist' piece.artist.id %}">{{ piece.artist }}</li>
         {% endfor %}
     </ul>
 
