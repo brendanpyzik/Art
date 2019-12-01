@@ -2,6 +2,26 @@
 
 {% block title %}Search{%  endblock %}
 
+{% block script %}
+function changeEntryType(){
+        var radio = document.getElementsByName('entryType');
+        for(i = 0; i < radio.length; i++) {
+                if(radio[i].checked){
+                    var type = radio[i].value;
+                }
+        }
+        if (type==='Artist'){
+                document.getElementById('ArtistForm').style = "display: block";
+                document.getElementById('PieceForm').style = "display: none";
+        }
+        else{
+                document.getElementById('ArtistForm').style = "display: none";
+                document.getElementById('PieceForm').style = "display: block";
+
+        }
+    }
+{% endblock %}
+
 {% block content %}
 
     {% if message %}
@@ -13,80 +33,36 @@
     {% endif %}
 
     <h3>Search</h3>
-    <form  action="{% url 'search' %}" method="post">
-    {% csrf_token %}
-    <div class="row">
-        <div class="col-2">
-        Artist:
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-10">
-            <select name="artist">
-                    <option value="" selected>---------</option>
-                    {% for artist in artists %}
-                        <option value="{{artist.artist_name}}">{{artist.artist_name}}</option>
-                    {% endfor %}
-            </select><br>
-        </div>
-        <div class="col-2">
-        Title:
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-10">
-            <input name="title" type="text" size="15">
-        </div>
+    <p>Type of query:
+    <input type="radio" name="entryType" value="Artist"> Artist
+    <input type="radio" name="entryType" value="Piece"> Piece
+        <button onclick= "changeEntryType();" type="button">Submit</button></p>
+
+    <div id="ArtistForm" style="display: none">
+        <form  action="" method="post">
+            {% csrf_token %}
+            Artist: <select name="artist">
+            <option value="" selected>---------</option>
+            {% for selectedartist in artists %}
+                <option value="{{selectedartist.artist_name}}">{{selectedartist.artist_name}}</option>
+            {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </form>
     </div>
-    <div class="row">
-        <div class="col-2">
-            Movement: <br>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-10">
-            <input name="movement" type="text" size="15">
-        </div>
-        <div class="col-2">
-            Country:
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-10">
-            <input name="country" type="text" size="15">
-        </div>
+    <div id="PieceForm" style="display: none">
+        <form action="" method="post">
+            {% csrf_token %}
+            Title:
+            <input type="text">
+            <button type="submit">Submit</button>
+        </form>
+
     </div>
-    <div class="row">
-        <div class="col-2">
-            Type: <br>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-10">
-            <input name="type" type="text" size="15">
-        </div>
-        <div class="col-2">
-            Medium:
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-10">
-            <input name="medium" type="text" size="15">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            Year:
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-2">
-            From:
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-10">
-             <input name="yearfrom" type="number" value="0" size="15">
-        </div>
-        <div class="col-2">
-            To:
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-10">
-             <input name="yearto" type="number" value="0" size="15">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <input type="submit" value="Search">
-        </div>
-    </div>
-    </form>
+
+
+
+
 
     <h3>Artists</h3>
 
