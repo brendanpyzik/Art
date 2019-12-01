@@ -60,12 +60,18 @@ def piece(request):
     template = "piece.html"
     return render(request, template)
 
-def query(request):
+def search(request):
     if not request.user.is_authenticated:
         return render(request, 'registration/login.html', {'message': None})
     pieces = Piece.objects.all()
     artists = Artist.objects.all()
     return render(request, 'search.html', {'pieces' : pieces,'artists' : artists})
+
+def searchartist(request):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {'message': None})
+    name = request.POST['artist']
+    return render(request, 'search.html', {'result': Piece.objects.filter(artist__artist_name=name)})
 
 class artistView(generic.DetailView):
     model = Artist

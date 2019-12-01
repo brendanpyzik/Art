@@ -39,7 +39,7 @@ function changeEntryType(){
         <button onclick= "changeEntryType();" type="button">Submit</button></p>
 
     <div id="ArtistForm" style="display: none">
-        <form  action="" method="post">
+        <form  action="{% url 'searchartist' %}" method="post">
             {% csrf_token %}
             Artist: <select name="artist">
             <option value="" selected>---------</option>
@@ -67,7 +67,7 @@ function changeEntryType(){
     <h3>Artists</h3>
 
     <ul>
-        {% for artist in artists %}
+        {% for artist in result %}
                 <li><a href="{% url 'artist' artist.id %}">{{ artist }}</a></li>
         {% endfor %}
     </ul>
