@@ -20,7 +20,7 @@ class Piece(models.Model):
     year = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.title}"
+        return self.title, self.artist
 
 
 

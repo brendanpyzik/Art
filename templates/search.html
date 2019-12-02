@@ -25,31 +25,13 @@ function changeEntryType(){
 {% block content %}
 
     <h3>Search</h3>
-    <p>Search for pieces by:
-    <input type="radio" name="entryType" value="Artist"> Artist
-    <input type="radio" name="entryType" value="Piece"> Piece
-        <button onclick= "changeEntryType();" type="button">Submit</button></p>
-
-    <div id="ArtistForm" style="display: none">
-        <form  action="{% url 'searchartist' %}" method="post">
+    <div id="SearchForm">
+        <p><form action="{% url 'query' %}" method="post">
             {% csrf_token %}
-            Artist: <select name="artist">
-            <option value="" selected>---------</option>
-            {% for selectedartist in artists %}
-                <option value="{{selectedartist.artist_name}}">{{selectedartist.artist_name}}</option>
-            {% endfor %}
-            </select>
+            <input type="text" name="find" default="Search">
             <button type="submit">Submit</button>
-        </form>
-    </div>
-    <div id="PieceForm" style="display: none">
-        <form action="{% url 'searchpiece' %}" method="post">
-            {% csrf_token %}
-            Title:
-            <input type="text" name="title">
-            <button type="submit">Submit</button>
-        </form>
-
+        </form></p>
+        <p> &nbsp; </p>
     </div>
 
     {% if message %}
@@ -59,11 +41,29 @@ function changeEntryType(){
             </div>
 
     {% endif %}
+    {% if found_artists %}
+        <div>
+            <h3>Artists</h3>
+            {% for artist in found_artists %}
+                <p><a href="{% url 'artist' artist.id %}">{{ artist }}</a></p>
+            {% endfor %}
+            {% if found_artist_pieces %}
+                <h3>Pieces</h3>
+                {% for piece in found_artist_pieces %}
+                    <p><a href="{% url 'piece' piece.id %}">{{ piece.title }}</a></p>
+                {% endfor %}
+            {% endif %}
 
-    <ul>
-        {% for piece in result %}
-                <li><a href="{% url 'piece' piece.id %}">{{ piece }}</a> by <a href="{% url 'artist' piece.artist.id %}">{{ piece.artist }}</li>
-        {% endfor %}
-    </ul>
+
+        </div>
+    {% endif %}
+    {% if found_pieces %}
+        <div>
+            <h3>Pieces</h3>
+            {% for piece in found_pieces %}
+                <p><a href="{% url 'piece' piece.id %}">{{ piece.title }}</a> by <a href="{% url 'artist' piece.artist.id %}">{{ piece.artist }}</a></p>
+            {% endfor %}
+        </div>
+    {% endif %}
 
 {% endblock content %}

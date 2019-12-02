@@ -67,19 +67,14 @@ def search(request):
     artists = Artist.objects.all()
     return render(request, 'search.html', {'pieces' : pieces,'artists' : artists})
 
-def searchartist(request):
+def query(request):
     if not request.user.is_authenticated:
         return render(request, 'registration/login.html', {'message': None})
-    name = request.POST['artist']
-    artists = Artist.objects.all()
-    return render(request, 'search.html', {'message' : 'Results', 'result': Piece.objects.filter(artist__artist_name=name), 'artists': artists})
-
-def searchpiece(request):
-    if not request.user.is_authenticated:
-        return render(request, 'registration/login.html', {'message': None})
-    piecetitle = request.POST['title']
-    artists = Artist.objects.all()
-    return render(request, 'search.html', {'message' : 'Results', 'result': Piece.objects.filter(title__contains = piecetitle), 'artists': artists})
+    find = request.POST['find']
+    found_artists = Artist.objects.filter(artist_name__contains=find)
+    found_artist_pieces = Piece.objects.filter(artist__artist_name__contains=find)
+    found_pieces = Piece.objects.filter(title__contains=find)
+    return render(request, 'search.html', {'message' : 'Results', 'found_pieces': found_pieces, 'found_artists': found_artists, 'found_artist_pieces': found_artist_pieces})
 
 class artistView(generic.DetailView):
     model = Artist
