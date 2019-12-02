@@ -3,6 +3,15 @@
 {% block title %}Search{%  endblock %}
 
 {% block script %}
+
+  {% comment %} $.ajax ({
+            url: {% url 'delete' %},
+            data: {"id" : id},
+            success: function(data) {
+                console.log('it worked')
+            }
+
+        });{% endcomment %}
 {% endblock %}
 
 {% block content %}
@@ -36,7 +45,7 @@
                 <h3>Pieces</h3>
                 <p>
                 {% for piece in found_artist_pieces %}
-                    <input type="button" value="Delete"> &nbsp;
+                    <input type="button" value="{{ piece.id }}"> &nbsp;
                     <a href="{% url 'piece' piece.id %}">{{ piece.title }}</a><br>
                 {% endfor %}
                 </p>
@@ -49,7 +58,7 @@
         <div>
             <h3>Pieces</h3>
             {% for piece in found_pieces %}
-                <input type="button" id="delete" value="Delete" onclick="deleteItem({{ piece.id }})"> &nbsp;
+                <input type="button" id="delete" value="Delete" onclick="deleteItem({{ piece.id }});"> &nbsp;
                 <a href="{% url 'piece' piece.id %}">{{ piece.title }}</a> by <a href="{% url 'artist' piece.artist.id %}">{{ piece.artist }}</a>
                 <br>
             {% endfor %}
@@ -57,4 +66,45 @@
         </div>
     {% endif %}
 
+    <script>
+
+    function deleteItem(id) {
+
+        console.log(id);
+
+        $.ajax({
+            url: '{% url 'delete' %}',
+            dataType: 'json',
+            data: {'id' : id},
+            method: 'GET',
+            success: function (response) {
+                if(response == 'okay'){
+                    //
+                }
+                console.log(response);
+
+            },
+            error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                console.log(msg);
+            }
+        });
+    }
+    </script>
+    <button type="button" onclick="deleteItem(1);"> Test</button>
 {% endblock content %}
