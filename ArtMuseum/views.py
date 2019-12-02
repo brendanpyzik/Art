@@ -84,9 +84,9 @@ class pieceView(generic.DetailView):
     model = Piece
     template_name = 'piece.html'
 
-def delete(request):
+def deletePiece(request):
     if not request.user.is_authenticated:
         return render(request, 'registration/login.html', {'message': None})
-
+    Piece.objects.get(id=request.POST[id]).delete()
     message = "Deleted "
-    return render(request, 'search.html', {'pieces': Piece.objects.all(), 'artists': Artist.objects.all(), 'message':message})
+    return render(request, 'search.html', {'message': message})
