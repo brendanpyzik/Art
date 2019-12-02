@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ piece.artist }}, {{ piece }}{%  endblock %}
+{% block title %}{{ piece.artist }}, {{ piece.title }}{%  endblock %}
 
 {% block content %}
-    <a href="javascript:history.back()" style="float: right">Back</a>
-    <p>Artist: {{ piece.artist }}</p>
-    <p>Title: {{ piece.title }}</p>
-    <img src="{{ piece.picture_url }}" height=300 width=300>
-
+    <p><a href="javascript:history.back()" style="float: right">Back</a></p>
+    <div style="text-align: center;">
+    <h3>{{ piece.artist }}</h3>
+        <hr>
+    <h3>{{ piece.title }}</h3>
+        <p> &nbsp; </p>
+        <p><img src="{{ piece.picture_url }}" width=90%></p>
+    </div>
+    <p><a href="javascript:history.back()" style="float: right">Back</a></p>
 {% endblock content %}
