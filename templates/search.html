@@ -3,14 +3,19 @@
 {% block title %}Search{%  endblock %}
 
 {% block script %}
-  {% comment %} $.ajax ({
-            url: {% url 'delete' %},
-            data: {"id" : id},
-            success: function(data) {
-
-            }
-
-        });{% endcomment %}
+    function deleteItem(id) {
+        document.getElementById('piece_' + id).style = "display: none";
+        $.ajax({
+            url: '{% url 'delete' %}',
+            dataType: 'json',
+            data: {'id' : id},
+            method: 'GET',
+            success: function (response) {
+                if(response == 'okay'){
+                }
+            },
+        });
+    }
 {% endblock %}
 
 {% block content %}
@@ -44,8 +49,10 @@
                 <h3>Pieces</h3>
                 <p>
                 {% for piece in found_artist_pieces %}
-                    <input type="button" value="{{ piece.id }}"> &nbsp;
+                <div id="piece_{{ piece.id }}">
+                <input type="button" id="delete" value="Delete" onclick="deleteItem({{ piece.id }});"> &nbsp;
                     <a href="{% url 'piece' piece.id %}">{{ piece.title }}</a><br>
+                </div>
                 {% endfor %}
                 </p>
             {% endif %}
@@ -70,10 +77,7 @@
     <script>
 
     function deleteItem(id) {
-
         document.getElementById('piece_' + id).style = "display: none";
-        console.log(id);
-
         $.ajax({
             url: '{% url 'delete' %}',
             dataType: 'json',
@@ -82,28 +86,7 @@
             success: function (response) {
                 if(response == 'okay'){
                 }
-                console.log(response);
-
             },
-            error: function (jqXHR, exception) {
-                var msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status == 404) {
-                    msg = 'Requested page not found. [404]';
-                } else if (jqXHR.status == 500) {
-                    msg = 'Internal Server Error [500].';
-                } else if (exception === 'parsererror') {
-                    msg = 'Requested JSON parse failed.';
-                } else if (exception === 'timeout') {
-                    msg = 'Time out error.';
-                } else if (exception === 'abort') {
-                    msg = 'Ajax request aborted.';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                }
-                console.log(msg);
-            }
         });
     }
     </script>

@@ -5,10 +5,16 @@
 {% block content %}
     
 
-    <h2> Welcome, {{ user.username }} </h2>
     <div class="container">
         <div class="row">
-            <div class="col-8">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <h3> Welcome, {{ user.username }}!</h3>
+                <p> You have entered the magnificent world of art.
+                    Feel free to explore our ever growing database of artists and works.
+                    While you're here you can contribute your own favorite works to the collection.
+                </p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <a class="twitter-timeline" href="https://twitter.com/the_barnes?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
         </div>
