@@ -76,17 +76,12 @@ def query(request):
     found_pieces = Piece.objects.filter(title__contains=find)
     return render(request, 'search.html', {'message' : 'Results', 'found_pieces': found_pieces, 'found_artists': found_artists, 'found_artist_pieces': found_artist_pieces})
 
+
 class artistView(generic.DetailView):
     model = Artist
     template_name = 'artist.html'
 
+
 class pieceView(generic.DetailView):
     model = Piece
     template_name = 'piece.html'
-
-def deletePiece(request):
-    if not request.user.is_authenticated:
-        return render(request, 'registration/login.html', {'message': None})
-    Piece.objects.get(id=request.POST[id]).delete()
-    message = "Deleted "
-    return render(request, 'search.html', {'message': message})
