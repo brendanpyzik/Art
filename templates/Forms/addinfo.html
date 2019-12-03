@@ -26,13 +26,7 @@
 
 {% block content %}
 
-    {% if message %}
 
-            <div>
-                <h5>{{ message }}</h5>
-            </div>
-
-    {% endif %}
     <h2>Add an Entry</h2>
     <p><b>Type of entry:</b>
     <input type="radio" name="entryType" value="Artist"> Artist
@@ -41,6 +35,13 @@
     </p>
 
     <hr>
+    {% if message %}
+
+            <div>
+                <h5>{{ message }}</h5>
+            </div>
+
+    {% endif %}
     <div id="ArtistForm" style="display: none">
         <form  action="{% url 'addartist' %}" method="post">
             {% csrf_token %}
