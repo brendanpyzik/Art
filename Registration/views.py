@@ -13,6 +13,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 
+from .forms import RegistrationForm
 
 def index(request):
     if not request.user.is_authenticated:
@@ -49,39 +50,23 @@ def create_userold(request):
     password = request.POST['password']
     return render(request, 'registration/login.html', {'message': None})
 
+
 def create_user(request):
-    #This is the method to render the registiration form page and create a new user based on the form data
     if request.method == 'POST':
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        email = request.POST['email']
-        username = request.POST['username']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-
-        # More validation to make sure the above fields are not empty!
-
-        # Validate password1 matched with password2
-        # Validate the username and email address was not taken
-        if password1 == password2:
-            if User.objects.filter(username = username).exists():
-                print("Username is taken, must be unique")
-                messages.info(request, 'Username is taken, must be unique')
-                return render(request, 'registration/register.html', {'message' : 'Username is taken, must be unique'})
-            elif User.objects.filter(email = email).exists():
-                print("Email is taken, must be unique")
-                messages.info(request, 'Email is taken, must be unique')
-                return render(request, 'registration/register.html', {'message' : 'Email is taken, must be unique'})
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            password1 = request.POST['password1']
+            password2 = request.POST['password2']
+            if password1 == password2:
+                if User.objects.filter(username=request.POST['username']).exists():
+                    return render(request, 'registration/register.html', {'message': 'Username is taken, must be unique'})
+                elif User.objects.filter(email = request.POST['email']).exists():
+                    return render(request, 'registration/register.html', {'message' : 'Email is taken, must be unique'})
+                else:
+                    form.save()
+                    return render(request, 'registration/login.html', {'message': 'A user has been created!'})
             else:
-                User.objects.create_user(first_name=first_name, last_name=last_name, email=email,username=username, password=password1)
-                print("A user has been created!")
-                return render(request, 'registration/login.html', {'message': 'A user has been created!'})
+                return render(request, 'registration/register.html', {'message': 'Passwords do not match!'})
+
         else:
-            print("Passwords do not match!")
-            messages.info(request, 'Passwords do not match!')
-            return render(request, 'registration/register.html', {'message': 'Passwords do not match!'})
-
-        return redirect('index')
-
-    else:
-        return render(request, 'registration/register.html')
+            return render(request, 'registration/register.html')

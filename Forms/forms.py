@@ -1,6 +1,5 @@
 from django import forms
 from ArtMuseum.models import Artist, Piece
-from ArtMuseum import models
 
 
 class ArtistForm(forms.Form):
