@@ -14,7 +14,14 @@
             padding: 15px 0px;
         }
         h3 {
-                color: slategray;
+                color: dimgray;
+        }
+        h2 {
+                color: dimgray;
+                margin-top: 20px;
+                padding: 10px;
+                text-align: center;
+                border: solid 3px dimgray;
         }
         #nav li {
             list-style-type: none;
@@ -29,8 +36,11 @@
             h1 {
                 font-size: 31px;
             }
+            h2 {
+                font-size: 25px;
+            }
             h3 {
-                font-size: 28px;
+                font-size: 20px;
             }
             #nav {
                 padding: 0px 0px;
@@ -55,7 +65,7 @@
         <div class="col-12"><h1>Art Collection Database</h1></div>
     </div>
     <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-3">
+        <div class="col-sm-12 col-md-2 col-lg-2">
             <ul id="nav">
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'search' %}">Search</a></li>
@@ -65,7 +75,7 @@
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </div>
-        <div class="col-sm-12 col-md-9 col-lg-9">
+        <div class="col-sm-12 col-md-10 col-lg-10">
             {% block content %}
             {% endblock %}
         </div>
