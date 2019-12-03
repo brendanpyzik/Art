@@ -34,9 +34,9 @@
 
 {% block content %}
 
-    <h3>Search</h3>
+    <h2>Search</h2>
     <div id="SearchForm">
-        <p><form action="{% url 'query' %}" method="post">
+        <p>Enter search term: <form action="{% url 'query' %}" method="post">
             {% csrf_token %}
             <input type="text" name="find" default="Search">
             <button type="submit">Submit</button>
@@ -47,6 +47,7 @@
 
             <div>
                 <h3>{{ message }}</h3>
+                <hr>
             </div>
 
     {% endif %}
