@@ -17,7 +17,7 @@ from .forms import RegistrationForm
 
 def index(request):
     if not request.user.is_authenticated:
-        return render(request, 'registration/login.html', {'message' : None})
+        return render(request, 'Registration/login.html', {'message' : None})
     context = {'user' : request.user}
     return render(request, 'index.html', context)
 
@@ -29,26 +29,26 @@ def login_view(request):
         login(request, user)
         return redirect('index')
     else:
-        return render(request, 'registration/login.html', {'message' : 'Invalid credential'})
+        return render(request, 'Registration/login.html', {'message' : 'Invalid credential'})
 
 
 def logout_view(request):
     logout(request)
-    return render(request, 'registration/login.html', {'message' : 'Logged out.'})
+    return render(request, 'R/login.html', {'message' : 'Logged out.'})
 
 def show_profile(request):
     if not request.user.is_authenticated:
-        return render(request, 'registration/login.html', {'message': None})
-    return render(request, 'registration/profile.html')
+        return render(request, 'Registration/login.html', {'message': None})
+    return render(request, 'Registration/profile.html')
 
 '''@login_required(login_url='/login/')
     def show_profile(request):
-    return render(request, 'registration/profile.html')'''
+    return render(request, 'Registration/profile.html')'''
 
 def create_userold(request):
     username = request.POST['username']
     password = request.POST['password']
-    return render(request, 'registration/login.html', {'message': None})
+    return render(request, 'Registration/login.html', {'message': None})
 
 
 def create_user(request):
@@ -59,14 +59,14 @@ def create_user(request):
             password2 = request.POST['password2']
             if password1 == password2:
                 if User.objects.filter(username=request.POST['username']).exists():
-                    return render(request, 'registration/register.html', {'message': 'Username is taken, must be unique'})
+                    return render(request, 'Registration/register.html', {'message': 'Username is taken, must be unique'})
                 elif User.objects.filter(email = request.POST['email']).exists():
-                    return render(request, 'registration/register.html', {'message' : 'Email is taken, must be unique'})
+                    return render(request, 'Registration/register.html', {'message' : 'Email is taken, must be unique'})
                 else:
                     form.save()
-                    return render(request, 'registration/login.html', {'message': 'A user has been created!'})
+                    return render(request, 'Registration/login.html', {'message': 'A user has been created!'})
             else:
-                return render(request, 'registration/register.html', {'message': 'Passwords do not match!'})
+                return render(request, 'Registration/register.html', {'message': 'Passwords do not match!'})
 
         else:
-            return render(request, 'registration/register.html')
+            return render(request, 'Registration/register.html')
