@@ -58,7 +58,7 @@
             <h3>Artists</h3>
             <p>
             {% for artist in found_artists %}
-                <div id="artist_{{ piece.id }}">
+                <div id="artist_{{ artist.id }}">
                 <input type="button" id="delete" value="Delete" onclick="deleteArtist({{ artist.id }});"> &nbsp;
                 <a href="{% url 'artist' artist.id %}">{{ artist }}</a><br>
             {% endfor %}

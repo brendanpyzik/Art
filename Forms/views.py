@@ -5,7 +5,7 @@ from .forms import ArtistForm, PieceForm
 
 def add_artist(request):
     if not request.user.is_authenticated:
-        return render(request, 'registration/login.html', {'message': None})
+        return render(request, 'Registration/login.html', {'message': None})
 
     if request.method == 'POST':
         form = ArtistForm(request.POST)
@@ -17,7 +17,7 @@ def add_artist(request):
 
 def add_piece(request):
     if not request.user.is_authenticated:
-        return render(request, 'registration/login.html', {'message': None})
+        return render(request, 'Registration/login.html', {'message': None})
 
     if request.method == 'POST':
         form = PieceForm(request.POST)
