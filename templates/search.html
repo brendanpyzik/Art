@@ -35,10 +35,10 @@
 {% block content %}
 
     <h2>Search</h2>
-    <div id="SearchForm">
-        <p>Enter search term: <form action="{% url 'query' %}" method="post">
+    <div style="text-align: center;" id="SearchForm">
+        <p><form action="{% url 'query' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="find" default="Search">
+            <input type="text" name="find" default="Search" size="42">
             <button type="submit">Submit</button>
         </form></p><br>
     </div>

@@ -3,7 +3,7 @@
 {% block title %}Log In{% endblock %}
 
 {% block content %}
-        <h3> Login </h3>
+        <h2> Login </h2>
 
         {% if message %}
 
@@ -15,10 +15,24 @@
 
         <form  action="{% url 'login' %}" method="post">
             {% csrf_token %}
-            Username: <input name="username" type="text">
-            <br>
-            Password: <input name="password" type="password">
-            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        Username:
+                    </div>
+                    <div class="col-8">
+                        <input name="username" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Password:
+                    </div>
+                    <div class="col-8">
+                        <input name="password" type="password">
+                    </div>
+                </div>
+            </div>
             <input type="submit" value="Login">
         </form>
 

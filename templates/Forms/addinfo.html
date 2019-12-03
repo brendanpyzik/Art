@@ -43,15 +43,48 @@
     <div id="ArtistForm" style="display: none">
         <form  action="{% url 'addartist' %}" method="post">
             {% csrf_token %}
-            Name: <input name="artist_name" type="text">
-            <br>
-            Movement: <input name="movement" type="text">
-            <br>
-            Country: <input name="country" type="text">
-            <br>
-            Birth year: <input name="birth_year" type="number" value="0">
-            <br>
-            Death year: <input name="death_year" type="number" value="0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        Name:
+                    </div>
+                    <div class="col-8">
+                        <input name="artist_name" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Movement:
+                    </div>
+                    <div class="col-8">
+                        <input name="movement" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Country:
+                    </div>
+                    <div class="col-8">
+                        <input name="country" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Birth year:
+                    </div>
+                    <div class="col-8">
+                        <input name="birth_year" type="number" value="0">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Death year:
+                    </div>
+                    <div class="col-8">
+                        <input name="death_year" type="number" value="0">
+                    </div>
+                </div>
+            </div>
             <br>
             <input type="submit" value="Create">
             </form>
@@ -60,23 +93,61 @@
     <div id="PieceForm" style="display: none">
         <form  action="{% url 'addpiece' %}" method="post">
             {% csrf_token %}
-            Artist: <select name="artist">
-            <option value="" selected>---------</option>
-            {% for selectedartist in artists %}
-                <option value="{{selectedartist.artist_name}}">{{selectedartist.artist_name}}</option>
-            {% endfor %}
-            </select>
-            <br>
-            Title: <input name="title" type="text">
-            <br>
-            Type: <input name="type" type="text">
-            <br>
-            Medium: <input name="medium" type="text">
-            <br>
-            Picture URL: <input name="picture_url" type="text">
-            <br>
-            Year: <input name="year" type="number" value="0">
-            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        Artist:
+                    </div>
+                    <div class="col-8">
+                        <select name="artist">
+                            <option value="" selected>---------</option>
+                            {% for selectedartist in artists %}
+                                <option value="{{selectedartist.artist_name}}">{{selectedartist.artist_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Title:
+                    </div>
+                    <div class="col-8">
+                        <input name="title" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Type:
+                    </div>
+                    <div class="col-8">
+                        <input name="type" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Medium:
+                    </div>
+                    <div class="col-8">
+                        <input name="medium" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Picture URL:
+                    </div>
+                    <div class="col-8">
+                        <input name="picture_url" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Year:
+                    </div>
+                    <div class="col-8">
+                        <input name="year" type="number" value="0">
+                    </div>
+                </div>
+            </div>
             <input type="submit" value="Create">
             </form>
     </div>
