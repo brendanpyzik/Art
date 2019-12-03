@@ -3,33 +3,35 @@
 {% block title %}Search{%  endblock %}
 
 {% block script %}
-    function deleteItem(id) {
-        document.getElementById('piece_' + id).style = "display: none";
-        document.getElementById('artist_piece_' + id).style = "display: none";
-        $.ajax({
-            url: '{% url 'deletePiece' %}',
-            dataType: 'json',
-            data: {'id' : id},
-            method: 'GET',
-            success: function (response) {
-                if(response == 'okay'){
-                }
-            },
-        });
-    }
-    function deleteArtist(id) {
-        document.getElementById('artist_' + id).style = "display: none";
-        $.ajax({
-            url: '{% url 'deleteArtist' %}',
-            dataType: 'json',
-            data: {'id' : id},
-            method: 'GET',
-            success: function (response) {
-                if(response == 'okay'){
-                }
-            },
-        });
-    }
+    <script>
+        function deleteItem(id) {
+            document.getElementById('piece_' + id).style = "display: none";
+            document.getElementById('artist_piece_' + id).style = "display: none";
+            $.ajax({
+                url: '{% url 'deletePiece' %}',
+                dataType: 'json',
+                data: {'id' : id},
+                method: 'GET',
+                success: function (response) {
+                    if(response == 'okay'){
+                    }
+                },
+            });
+        }
+        function deleteArtist(id) {
+            document.getElementById('artist_' + id).style = "display: none";
+            $.ajax({
+                url: '{% url 'deleteArtist' %}',
+                dataType: 'json',
+                data: {'id' : id},
+                method: 'GET',
+                success: function (response) {
+                    if(response == 'okay'){
+                    }
+                },
+            });
+        }
+    </script>
 {% endblock %}
 
 {% block content %}
