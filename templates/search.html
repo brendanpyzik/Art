@@ -5,8 +5,22 @@
 {% block script %}
     function deleteItem(id) {
         document.getElementById('piece_' + id).style = "display: none";
+        document.getElementById('artist_piece_' + id).style = "display: none";
         $.ajax({
-            url: '{% url 'delete' %}',
+            url: '{% url 'deletePiece' %}',
+            dataType: 'json',
+            data: {'id' : id},
+            method: 'GET',
+            success: function (response) {
+                if(response == 'okay'){
+                }
+            },
+        });
+    }
+    function deleteArtist(id) {
+        document.getElementById('artist_' + id).style = "display: none";
+        $.ajax({
+            url: '{% url 'deleteArtist' %}',
             dataType: 'json',
             data: {'id' : id},
             method: 'GET',
@@ -41,15 +55,16 @@
             <h3>Artists</h3>
             <p>
             {% for artist in found_artists %}
-                <input type="button" value="Delete"> &nbsp;
+                <div id="artist_{{ piece.id }}">
+                <input type="button" id="delete" value="Delete" onclick="deleteArtist({{ artist.id }});"> &nbsp;
                 <a href="{% url 'artist' artist.id %}">{{ artist }}</a><br>
             {% endfor %}
             </p>
             {% if found_artist_pieces %}
-                <h3>Pieces</h3>
+                <h3>Artist's Pieces</h3>
                 <p>
                 {% for piece in found_artist_pieces %}
-                <div id="piece_{{ piece.id }}">
+                <div id="artist_piece_{{ piece.id }}">
                 <input type="button" id="delete" value="Delete" onclick="deleteItem({{ piece.id }});"> &nbsp;
                     <a href="{% url 'piece' piece.id %}">{{ piece.title }}</a><br>
                 </div>
@@ -74,20 +89,5 @@
         </div>
     {% endif %}
 
-    <script>
 
-    function deleteItem(id) {
-        document.getElementById('piece_' + id).style = "display: none";
-        $.ajax({
-            url: '{% url 'delete' %}',
-            dataType: 'json',
-            data: {'id' : id},
-            method: 'GET',
-            success: function (response) {
-                if(response == 'okay'){
-                }
-            },
-        });
-    }
-    </script>
 {% endblock content %}

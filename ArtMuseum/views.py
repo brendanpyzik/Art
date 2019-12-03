@@ -88,10 +88,19 @@ class pieceView(generic.DetailView):
     model = Piece
     template_name = 'piece.html'
 
-def delete(request):
+def deletePiece(request):
     if (request.method == 'GET'):
         id = request.GET.get('id')
         print(request.GET.get('id'))
     Piece.objects.get(id=id).delete()
     data = {'response' : 'okay'}
     return  JsonResponse(data)
+
+
+def deleteArtist(request):
+    if request.method == 'GET':
+        id = request.GET.get('id')
+        print(request.GET.get('id'))
+    Artist.objects.get(id=id).delete()
+    data = {'response': 'okay'}
+    return JsonResponse(data)

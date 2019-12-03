@@ -1,18 +1,9 @@
-<!doctype html>
+{% extends 'base.html' %}
 
-<html>
+{% block title %}Create new user{% endblock %}
 
-    <head>
-        <title>Create new user</title>
-
-        <script>
-
-
-        </script>
-    </head>
-
-    <body>
-        <h1> Create a user </h1>
+{% block content %}
+        <h3> Create a user </h3>
 
         {% if message %}
 
@@ -39,5 +30,4 @@
             <input type="submit" value="Create">
         </form>
         <a href="{% url 'index' %}">Cancel</a>
-    </body>
-</html>
+{% endblock %}

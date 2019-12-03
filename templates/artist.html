@@ -3,8 +3,14 @@
 {% block title %}{{ artist }}{%  endblock %}
 
 {% block content %}
-    <a href="javascript:history.back()" style="float: right">Back</a>
-    <p>Name: {{ artist.artist_name }}</p>
+    <p><a href="javascript:history.back()" style="float: right">Back</a></p>
+    <div style="text-align: center;">
+    <h3>{{ artist.artist_name }}</h3>
+    <p>({{ artist.birth_year }} - {{ artist.death_year }})</p>
+    </div>
+        <hr>
     <p>Movement: {{ artist.movement }}</p>
+    <p>Country: {{ artist.country }}</p>
 
+    <p><a href="javascript:history.back()" style="float: right">Back</a></p>
 {% endblock content %}
