@@ -34,7 +34,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return render(request, 'R/login.html', {'message' : 'Logged out.'})
+    return render(request, 'Registration/login.html', {'message' : 'Logged out.'})
 
 def show_profile(request):
     if not request.user.is_authenticated:
